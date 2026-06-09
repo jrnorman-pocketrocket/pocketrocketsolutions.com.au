@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PocketRocket Solutions — Business Consulting for Founder-Led Businesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #1A3FCC;
+    --blue-light: #2952E8;
+    --black: #0D0D0D;
+    --grey: #6B6B6B;
+    --grey-light: #F4F4F2;
+    --white: #FFFFFF;
+    --border: #E2E2DE;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--black);
+    background: var(--white);
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5vw;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .nav-cta {
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--blue-light); }
+
+  /* ── HERO ── */
+  .hero {
+    padding-top: 120px;
+    padding-bottom: 80px;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-family: 'Sora', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--blue);
+    border: 1px solid var(--blue);
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.1s ease forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(34px, 4.5vw, 56px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    color: var(--black);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s ease forwards;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--blue);
+  }
+
+  .hero-body {
+    font-size: 18px;
+    color: var(--grey);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.3s ease forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.4s ease forwards;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: var(--white);
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 16px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--blue-light);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--black);
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 16px 30px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--black);
+    transform: translateY(-1px);
+  }
+
+  .hero-visual {
+    opacity: 0;
+    animation: fadeIn 0.8s 0.5s ease forwards;
+  }
+
+  .hero-card {
+    background: var(--grey-light);
+    border-radius: 16px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 200px;
+    height: 200px;
+    background: var(--blue);
+    opacity: 0.06;
+    border-radius: 50%;
+  }
+
+  .hero-stat {
+    margin-bottom: 28px;
+  }
+
+  .hero-stat:last-child { margin-bottom: 0; }
+
+  .hero-stat-label {
+    font-size: 12px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 4px;
+  }
+
+  .hero-stat-value {
+    font-family: 'Sora', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--black);
+  }
+
+  .hero-stat-value span { color: var(--blue); }
+
+  .hero-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+
+  /* ── PROBLEM ── */
+  .section {
+    padding: 80px 5vw;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-full {
+    padding: 80px 5vw;
+    background: var(--grey-light);
+  }
+
+  .section-full-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Sora', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 16px;
+  }
+
+  .section-heading {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(26px, 3.5vw, 40px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .section-subheading {
+    font-size: 17px;
+    color: var(--grey);
+    max-width: 580px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+
+  /* ── PROBLEM GRID ── */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .problem-item {
+    background: var(--white);
+    padding: 32px 28px;
+  }
+
+  .problem-icon {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+
+  .problem-item h3 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 8px;
+    letter-spacing: -0.2px;
+  }
+
+  .problem-item p {
+    font-size: 14px;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  /* ── HOW IT WORKS ── */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 48px;
+  }
+
+  .step {
+    position: relative;
+  }
+
+  .step-number {
+    font-family: 'Sora', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--blue);
+    opacity: 0.15;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .step h3 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+
+  .step p {
+    font-size: 15px;
+    color: var(--grey);
+    line-height: 1.65;
+  }
+
+  /* ── PRODUCTS ── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .product-card {
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 32px;
+    position: relative;
+    transition: border-color 0.2s, transform 0.2s;
+    background: var(--white);
+  }
+
+  .product-card:hover {
+    border-color: var(--blue);
+    transform: translateY(-3px);
+  }
+
+  .product-card.featured {
+    border-color: var(--blue);
+    background: var(--blue);
+    color: var(--white);
+  }
+
+  .product-badge {
+    display: inline-block;
+    font-family: 'Sora', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: var(--blue);
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+
+  .product-card.featured .product-badge {
+    background: rgba(255,255,255,0.2);
+  }
+
+  .product-price {
+    font-family: 'Sora', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 4px;
+  }
+
+  .product-price-note {
+    font-size: 13px;
+    color: var(--grey);
+    margin-bottom: 20px;
+  }
+
+  .product-card.featured .product-price-note { color: rgba(255,255,255,0.65); }
+
+  .product-card h3 {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.3px;
+    margin-bottom: 12px;
+  }
+
+  .product-card p {
+    font-size: 14px;
+    color: var(--grey);
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
+
+  .product-card.featured p { color: rgba(255,255,255,0.8); }
+
+  .product-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--blue);
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+
+  .product-card.featured .product-link {
+    color: var(--white);
+  }
+
+  .product-link:hover { gap: 10px; }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+
+  .about-photo-col {
+    position: relative;
+  }
+
+  .about-photo {
+    width: 100%;
+    border-radius: 16px;
+    display: block;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .about-photo-tag {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    background: var(--black);
+    border-radius: 10px;
+    padding: 18px 22px;
+  }
+
+  .about-photo-name {
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--white);
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+
+  .about-photo-title {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+
+  .about-photo-title span {
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  .about-text .section-heading {
+    margin-bottom: 20px;
+  }
+
+  .about-headline {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    line-height: 1.2;
+    color: var(--black);
+    margin-bottom: 28px;
+  }
+
+  .about-headline em {
+    font-style: normal;
+    color: var(--blue);
+  }
+
+  .about-body {
+    font-size: 16px;
+    color: var(--grey);
+    line-height: 1.75;
+    margin-bottom: 18px;
+  }
+
+  .about-body strong { color: var(--black); }
+
+  .about-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 28px 0;
+  }
+
+  .about-tag-line {
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+
+  .about-tag-line span { color: var(--blue); }
+
+  .about-sub-line {
+    font-size: 15px;
+    color: var(--grey);
+    line-height: 1.65;
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    padding: 80px 5vw;
+    background: var(--black);
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .cta-section .section-label { color: rgba(255,255,255,0.45); }
+
+  .cta-section h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--white);
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+
+  .cta-section h2 em {
+    font-style: normal;
+    color: var(--blue);
+  }
+
+  .cta-section p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 36px;
+    line-height: 1.7;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-white {
+    background: var(--white);
+    color: var(--black);
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 16px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-white:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 16px 30px;
+    border-radius: 8px;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(255,255,255,0.6);
+    color: var(--white);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 5vw;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .footer-logo span { color: var(--blue); }
+
+  footer p {
+    font-size: 13px;
+    color: var(--grey);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .problem-grid,
+    .steps,
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .about-photo { aspect-ratio: 1/1; }
+    .problem-grid { background: none; gap: 16px; }
+    .problem-item { border: 1px solid var(--border); border-radius: 10px; }
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding-top: 100px; }
+    .hero-actions { flex-direction: column; }
+    .cta-actions { flex-direction: column; align-items: center; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="https://storage.mlcdn.com/account_image/2310361/ExRjE9pNje0sMb3d9d769fXcf2WQAoWukPqvoHFI.png" alt="PocketRocket Solutions" style="height: 36px; width: auto;" />
+  </a>
+  <a href="https://pocketrocket-bottleneck-check.webflow.io/" class="nav-cta">Start for $5 →</a>
+</nav>
+
+<!-- HERO -->
+<div style="max-width:1200px; margin:0 auto;">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">For Founder-Led Businesses</div>
+      <h1>You built the business.<br>Now it's <em>running you.</em></h1>
+      <p class="hero-body">PocketRocket helps trade operators and service business owners find the bottlenecks, build the structure, and get their time back — without the corporate fluff.</p>
+      <div class="hero-actions">
+        <a href="#bottleneck" class="btn-primary">Get Your Bottleneck Check — $5</a>
+        <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-stat">
+          <div class="hero-stat-label">Where we start</div>
+          <div class="hero-stat-value">Your <span>bottleneck</span></div>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-label">What we build</div>
+          <div class="hero-stat-value">Your <span>systems</span></div>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-label">What you get back</div>
+          <div class="hero-stat-value">Your <span>time</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PROBLEM -->
+<div class="section-full">
+  <div class="section-full-inner">
+    <div class="reveal">
+      <div class="section-label">Sound familiar?</div>
+      <h2 class="section-heading">The business works.<br>But it only works when you're in it.</h2>
+      <p class="section-subheading">Most small business owners don't have a business problem. They have an operational dependency problem. Here's what that looks like.</p>
+    </div>
+    <div class="problem-grid reveal">
+      <div class="problem-item">
+        <div class="problem-icon">📱</div>
+        <h3>You can't switch off</h3>
+        <p>Every decision comes back to you. Calls, messages, quotes — if you stop, it all stops.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">🔄</div>
+        <h3>Same problems, different day</h3>
+        <p>You keep fixing the same fires. There's no system underneath — just you and a to-do list that never ends.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">📈</div>
+        <h3>Growth feels risky</h3>
+        <p>Taking on more work just means more stress. You know more revenue won't fix the real problem.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how-it-works">
+  <div class="reveal">
+    <div class="section-label">The process</div>
+    <h2 class="section-heading">Simple. Direct. No wasted time.</h2>
+    <p class="section-subheading">We don't start with a sales pitch. We start with your actual situation — and go from there.</p>
+  </div>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-number">01</div>
+      <h3>Tell us what's not working</h3>
+      <p>A short questionnaire gives us a clear picture of where the pressure is coming from. Costs $5. Takes five minutes. Filters out the noise on both sides.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-number">02</div>
+      <h3>Get a tailored diagnosis</h3>
+      <p>James personally reviews your answers and sends back a written report — your three biggest bottlenecks and concrete next steps. Within two business days.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-number">03</div>
+      <h3>Choose your next step</h3>
+      <p>A free Clarity Session to go deeper, or jump into the 90-Day Arc if you're ready to build. You decide the pace.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<div class="section-full" id="bottleneck">
+  <div class="section-full-inner">
+    <div class="reveal">
+      <div class="section-label">How we work together</div>
+      <h2 class="section-heading">Pick your starting point.</h2>
+      <p class="section-subheading">Every engagement starts with understanding your situation. We don't sell you a program before we know what you actually need.</p>
+    </div>
+    <div class="products-grid">
+
+      <div class="product-card reveal">
+        <div class="product-badge">Start Here</div>
+        <div class="product-price">$5</div>
+        <div class="product-price-note">AUD — one-time</div>
+        <h3>Bottleneck Check</h3>
+        <p>A short questionnaire, personally reviewed by James. You'll get a tailored PDF report identifying your top three operational bottlenecks and what to do about them. Delivered within two business days.</p>
+        <a href="https://pocketrocket-bottleneck-check.webflow.io/" class="product-link">Get your report →</a>
+      </div>
+
+      <div class="product-card featured reveal">
+        <div class="product-badge">Most Popular</div>
+        <div class="product-price">Free</div>
+        <div class="product-price-note">No obligation</div>
+        <h3>Clarity Session</h3>
+        <p>A one-on-one conversation to map where you are, where you want to be, and what's standing in the way. No pitch. No pressure. Just clarity on your next move.</p>
+        <a href="mailto:claritysession@pocketrocketsolutions.com.au?subject=Clarity%20Session%20Request&body=Hi%20James%2C%0A%0AI%27d%20like%20to%20meet%20for%20a%20Clarity%20Session.%0A%0AMy%20available%20days%20and%20preferred%20times%20are%3A%0A%0A" class="product-link">Book a session →</a>
+      </div>
+
+      <div class="product-card reveal">
+        <div class="product-badge">Core Engagement</div>
+        <div class="product-price">$2,000</div>
+        <div class="product-price-note">AUD — or 2 x $1,000</div>
+        <h3>The 90-Day Arc</h3>
+        <p>Six fortnightly one-on-one sessions over 90 days. We identify the bottlenecks, build the systems, and put structure in place so the business can run without you being the answer to every question.</p>
+        <a href="mailto:90dayarc@pocketrocketsolutions.com.au?subject=90-Day%20Arc%20Enquiry&body=Hi%20James%2C%0A%0AI%27m%20interested%20in%20finding%20out%20more%20about%20the%2090-Day%20Arc.%0A%0ACould%20you%20please%20give%20me%20a%20call%20or%20get%20in%20touch%20to%20discuss%3F%0A%0AMy%20contact%20number%20is%3A%0A%0ABest%20time%20to%20reach%20me%3A%0A%0A" class="product-link">Learn more →</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section">
+  <div class="about-grid">
+    <div class="about-photo-col reveal">
+      <img
+        src="https://storage.mlcdn.com/account_image/2310361/4w71gx5RFWQFZ5IaD5fig7FlxMic96GFSGr3BnQX.png"
+        alt="James Norman — Founder of PocketRocket Solutions"
+        class="about-photo"
+      />
+      <div class="about-photo-tag">
+        <div class="about-photo-name">James Norman</div>
+        <div class="about-photo-title">Founder, PocketRocket Solutions<br><span>Husband. Dad. Camp Director. Pastor.</span></div>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <div class="section-label">Meet James</div>
+      <h2 class="about-headline">I've been the bottleneck.<br><em>That's why I do this.</em></h2>
+      <p class="about-body">I've spent most of my working life being the bottleneck in my own business. Waking up at 3am with a head full of unfinished things. Feeling like I couldn't step away without something wobbling.</p>
+      <p class="about-body">I'm the Managing Director of Tunnel Ridge Ranch. Over 7+ years, I've helped take it from a volunteer-run operation to a professionally managed organisation. <strong>That didn't happen because I worked harder. It happened when I stopped trying to hold everything myself — and started building systems, people, and structure that could hold it instead.</strong></p>
+      <p class="about-body">I remember the shift clearly. The first morning I didn't have to be at camp for breakfast because I'd hired someone to hold that. I sat with my boy. Ate without rushing. Prayed with my wife. And felt — for the first time in a long time — like a human being rather than a human just doing.</p>
+      <div class="about-divider"></div>
+      <div class="about-tag-line">Because <span>you're not a data set.</span></div>
+      <p class="about-sub-line">You're a person running a business that was supposed to give you freedom. I'm not a consultant who drops a report and disappears. I'm someone who has lived exactly what you're living — and spent years figuring out what actually helps.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner">
+    <div class="section-label">Ready to start?</div>
+    <h2>Find out what's <em>really</em> holding your business back.</h2>
+    <p>The Bottleneck Check is $5 and takes five minutes. James personally reviews every submission and sends back a tailored report within two business days.</p>
+    <div class="cta-actions">
+      <a href="https://pocketrocket-bottleneck-check.webflow.io/" class="btn-white">Get Your Bottleneck Check — $5</a>
+      <a href="mailto:claritysession@pocketrocketsolutions.com.au?subject=Clarity%20Session%20Request&body=Hi%20James%2C%0A%0AI%27d%20like%20to%20meet%20for%20a%20Clarity%20Session.%0A%0AMy%20available%20days%20and%20preferred%20times%20are%3A%0A%0A" class="btn-ghost">Book a Free Clarity Session</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Pocket<span>Rocket</span> Solutions</a>
+  <p>Sunshine Coast, Queensland · pocketrocketsolutions.com.au</p>
+  <p style="font-size:13px; color: #6B6B6B;">© 2026 PocketRocket Solutions</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
